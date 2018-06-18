@@ -12,7 +12,7 @@ We're using:
 - Sketch
 
 
-1)Install all node modules.
+1) Install all node modules.
 
 2) Make sure you build it before starting the app.  (*You can create an auto task setting to automatically restart the server once you hit save*)
 
