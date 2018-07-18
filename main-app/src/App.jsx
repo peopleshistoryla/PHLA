@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import HeaderMenu from './components/HeaderMenu';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Wor  66 ddki7878ssng</h1>
+        <HeaderMenu />
         <p>ccd 3344</p>
       </div>
     );
