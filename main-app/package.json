@@ -21,7 +21,10 @@
     ]
   },
   "watch": {
-    "test": "{src}/**/*.js"
+    "build": {
+      "patterns": ["src"],
+      "extensions": "js,jsx"
+    }
   },
   "scripts": {
     "watch": "npm-watch build",
