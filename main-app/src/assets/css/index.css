@@ -25,6 +25,7 @@ body {
   padding-right:20px;
   flex:1;
   text-align: center;
+  text-decoration: none;
 }
 
 .title-menu{
@@ -35,4 +36,10 @@ body {
     position: relative;
     left: 50%;
     height: 100px;
+}
+
+.title-menu span{
+  font-size:40px;
+  padding-right: 40px;
+  line-height: 2em;
 }

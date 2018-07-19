@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div className="App">
         <HeaderMenu />
-        <p>ccd 3344</p>
+        
       </div>
     );
   }
