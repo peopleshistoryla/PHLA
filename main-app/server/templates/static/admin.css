@@ -1,0 +1,18 @@
+
+
+html{
+    font-family: sans-serif;
+    background-color: #E1E8E8;
+}
+input{
+    padding: 8px;
+    border-radius: 10px;
+
+}
+
+div{
+    border: solid 2px black;
+    padding-left: 10px;
+    padding-bottom: 25px;
+    border-radius: 10px;
+}
