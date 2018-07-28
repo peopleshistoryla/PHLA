@@ -1,5 +1,6 @@
 
 
+
 html{
     font-family: sans-serif;
     background-color: #E1E8E8;
@@ -15,4 +16,10 @@ div{
     padding-left: 10px;
     padding-bottom: 25px;
     border-radius: 10px;
+  
+}
+
+input{
+    padding:30px;
+    border-radius:10px;
 }
