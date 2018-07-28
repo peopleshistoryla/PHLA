@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="admin_html">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,14 +10,19 @@
 </head>
 <body>
     <div>
-    <h1>Welcome to the Admin Page</h1>
+    <h1> Welcome to the Admin Page</h1>
+    <div class="error_message">
+        <p><strong>WRONG USERNAME AND/OR PASSWORD, PLEASE TRY AGAIN.
+
+        </strong></p>
+    </div>
     <form>
         <p><label>Enter Username</label>
-        <input placeholder="" type="text" /> </p>
+        <input class="admin_input" placeholder="" type="text" /> </p>
 
       <p> <label>Enter Password</label>
-        <input placeholder="" type= "password" /> </p> 
-        <input type= "submit"/> 
+        <input class="admin_input"placeholder="" type= "password" /> </p> 
+        <input class= "admin_button" type= "submit"/> 
     </form>
 
     </div>

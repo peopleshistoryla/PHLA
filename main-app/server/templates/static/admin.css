@@ -1,14 +1,31 @@
 
 
 
-html{
+.admin_html{
     font-family: sans-serif;
-    background-color: #E1E8E8;
+    background-color: rgb(131, 128, 128);
+    
 }
-input{
-    padding: 8px;
-    border-radius: 10px;
 
+h1{
+    color: pink;
+}
+.admin_input{
+    padding: 4px;
+    border-radius: 10px;
+    
+}
+.admin_button{
+    padding: 8px;
+    background-color: pink;
+}
+.error_message{
+    padding: 0px;
+    color:white;
+    border-radius:0px;
+    background-color: red;
+    margin-right: 10px;
+    border: none;
 }
 
 div{
@@ -17,9 +34,4 @@ div{
     padding-bottom: 25px;
     border-radius: 10px;
   
-}
-
-input{
-    padding:30px;
-    border-radius:10px;
 }
