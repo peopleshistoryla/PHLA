@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import './assets/css/index.css';
 import App from './App';
 
 const Page404 = ({location}) => {

@@ -12,12 +12,13 @@ export default class HeaderMenu extends React.Component{
                 <nav class="header-menu">
                     <div>
                     <Link to="/about">About</Link>
-                    <Link to="/submit">Submit Your Story</Link>
+                    <Link to="/submit">Submit A Story</Link>
                     <Link to="/contributors">Contributors</Link>
                     </div>
                 </nav>
                 <div class="title-menu">
-                    <span>People's History of Los Angeles</span>
+                    <span className="top-title" style={{position:"relative", left:"200px"}}>People's History of</span> <br />
+                    <span className="title" style={{fontSize:"75px", marginTop:"20px"}}>Los Angeles</span>
                 </div>
             </div>
         )
