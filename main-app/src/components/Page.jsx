@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderMenu from '../components/HeaderMenu'
+import HeaderMenu from './HeaderMenu'
 export default function Page(props){
     return(
         <div>

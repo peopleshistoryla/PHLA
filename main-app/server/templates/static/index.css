@@ -52,16 +52,35 @@ body {
 }
 
 .container{
-  padding:50px;
+  padding:20px;
   margin:20px;
 }
 
 #mapdiv{
-  height: 180px;
-  width:100%;
-  border: 2px solid black;
+  height: 400px;
+  width:80%;
+  margin-left:10%;
+  border:0.75px solid black;
 }
 
 .leaflet-container{
   height: inherit;
+}
+
+.timeline{
+  display:flex;
+  border-top: 14px solid black;
+  margin-top:20px;
+  width:80%;
+  margin-left:10%;
+}
+
+.timeline .timeline-date{
+  flex:.2;
+  font-size:2em;
+  cursor: pointer;
+}
+
+.timeline-selected{
+  color: green;
 }

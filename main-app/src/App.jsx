@@ -5,8 +5,8 @@ class App extends Component {
   render() {
     return (
       <Page>
-        <p>Hello</p>
         <PHLAMap />
+        
       </Page>
     );
   }
