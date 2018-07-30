@@ -11,17 +11,18 @@
 <body>
     <div>
     <h1> Welcome to the Admin Page</h1>
+    {% if show_error %}
     <div class="error_message">
         <p><strong>WRONG USERNAME AND/OR PASSWORD, PLEASE TRY AGAIN.
-
         </strong></p>
     </div>
-    <form>
+    {% endif %}
+    <form action="/admin" method="POST">
         <p><label>Enter Username</label>
-        <input class="admin_input" placeholder="" type="text" /> </p>
+        <input class="admin_input" name="username" placeholder="" type="text" /> </p>
 
       <p> <label>Enter Password</label>
-        <input class="admin_input"placeholder="" type= "password" /> </p> 
+        <input class="admin_input"placeholder="" name="password" type= "password" /> </p> 
         <input class= "admin_button" type= "submit"/> 
     </form>
 
