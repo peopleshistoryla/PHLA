@@ -78,21 +78,43 @@ export default class PHLAMap extends React.Component{
         if(this.state.loading){
             return(<p>Grabbing your location...</p>)
         }else{
-        return(<div>
-                <div id="mapdiv">
-                    <Map center={this.state.location} zoom={13}>
-                        <TileLayer attribution="&nbsp; &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                        {this.state.markers.map((elem, idx) => {
-                            return <Marker position={elem.location} key={idx}></Marker>
+            if(window.outerWidth < 500){
+                return(<div>
+                    <label>Select a Decade</label>
+                    <select onChange={(e) => {
+                        this.changeTimelineDate(e.target.value);
+                    }}>
+                        {year_labels.map((v, idx)=>{
+                            return <option value={idx}>{v}</option>
                         })}
-                    </Map>
+                    </select>
+                    <div id="mapdiv">
+                        <Map center={this.state.location} zoom={13}>
+                            <TileLayer attribution="&nbsp; &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                            {this.state.markers.map((elem, idx) => {
+                                return <Marker position={elem.location} key={idx}></Marker>
+                            })}
+                        </Map>
+                    </div>
                 </div>
-                <Timeline values={year_labels} startingIndex={1} onTimelineSelect={this.changeTimelineDate} />
-            </div>
-            ) 
+                ) 
+            }else{
+                return(<div>
+                    <div id="mapdiv">
+                        <Map center={this.state.location} zoom={13}>
+                            <TileLayer attribution="&nbsp; &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                            {this.state.markers.map((elem, idx) => {
+                                return <Marker position={elem.location} key={idx}></Marker>
+                            })}
+                        </Map>
+                    </div>
+                    <Timeline values={year_labels} startingIndex={1} onTimelineSelect={this.changeTimelineDate} />
+                </div>
+                ) 
+            }
         }
-        
     }
 
 }

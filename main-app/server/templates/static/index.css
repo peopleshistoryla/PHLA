@@ -8,6 +8,7 @@ body {
   background-image: url("/static/skyline.jpg");
   background-position: -258px 50px;
   background-repeat: no-repeat;
+  width:100%;
 }
 
 
@@ -15,15 +16,22 @@ body {
   height: 50px;
   background-color: #C86227;
   line-height: 50px;
-
+  margin-bottom: 30px;
 }
 
 .header-menu div{
   width:100%;
   display:flex;
-  align-items:stretch;
-
 }
+
+@media (max-width:450px){
+  .header-menu div{
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+  }
+}
+
 .header-menu a{
   color:white;
   padding-left:20px;
@@ -37,19 +45,46 @@ body {
     display: inline-flex;
     position: relative;
     height: 100px;
+    width:100%;
 }
 
-.title-menu .title{
+.title{
   font-family: 'Leckerli One', cursive;
-
+  font-size:4em;
+  margin-left:10%;
 }
 
-.title-menu .top-title{
-  position: relative;
-    left: 200px;
-    font-size: 35px;
-    line-height: 34px;
+select{
+  background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
+    margin-left:5%;
+    margin-bottom:20px;
 }
+
+@media (min-width:300px) and (max-width:400px){
+  .title{
+    font-family: 'Leckerli One', cursive;
+    font-size:4em;
+    margin-left:10%;
+    line-height: 55px;
+    margin-top:25px;
+  }
+}
+
+.top-title{
+    font-size: 30px;
+    line-height: 0px;
+    padding-left: 30px;
+    width:100%;
+}
+
+.top-title a, .title a{
+  text-decoration: none;
+  color:black;
+}
+
 
 .container{
   padding:20px;
@@ -58,8 +93,8 @@ body {
 
 #mapdiv{
   height: 400px;
-  width:80%;
-  margin-left:10%;
+  width:90%;
+  margin-left:5%;
   border:0.75px solid black;
 }
 
@@ -71,8 +106,8 @@ body {
   display:flex;
   border-top: 14px solid black;
   margin-top:20px;
-  width:80%;
-  margin-left:10%;
+  width:90%;
+  margin-left:5%;
 }
 
 .timeline .timeline-date{
@@ -83,4 +118,10 @@ body {
 
 .timeline-selected{
   color: green;
+}
+
+.headerBox{
+  background-color:black;
+  color:white;
+  padding-left:10px;
 }
