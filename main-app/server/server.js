@@ -5,7 +5,7 @@ const templateRender = require("./render")
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser')
 
-nunjucks.configure("server/templates", {
+nunjucks.configure( __dirname + "/templates", {
     express:app,
     autoescape:true
 });
