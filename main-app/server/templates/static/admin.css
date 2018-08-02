@@ -6,14 +6,17 @@
 
 }
 .welcome_message{
-    background-color: green;
+    background-color: rgb(184, 184, 26);
+    color: white;
+    font-weight: bold;
 }
 .admin_html{
-    background-color: grey;
+    background-color: lightgrey;
 }
     
-h1{
-    color: pink;
+h1
+{
+    color:black;
     font-family: sans-serif;
     
 }
@@ -24,7 +27,7 @@ h1{
 }
 .admin_button{
     padding: 8px;
-    background-color: pink;
+    background-color:white;
 }
 .error_message{
     padding: 0px;
@@ -36,7 +39,8 @@ h1{
 }
 
 div{
-    border: solid 2px black;
+    border: black solid;
+    border-width: 2px;
     padding-left: 10px;
     padding-bottom: 25px;
     border-radius: 10px;  
