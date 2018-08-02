@@ -1,14 +1,21 @@
 
 
-
 .admin_html{
     font-family: sans-serif;
     background-color: rgb(131, 128, 128);
-    
-}
 
+}
+.welcome_message{
+    background-color: green;
+}
+.admin_html{
+    background-color: grey;
+}
+    
 h1{
     color: pink;
+    font-family: sans-serif;
+    
 }
 .admin_input{
     padding: 4px;
@@ -32,6 +39,10 @@ div{
     border: solid 2px black;
     padding-left: 10px;
     padding-bottom: 25px;
-    border-radius: 10px;
-  
+    border-radius: 10px;  
+    
+    
+    
 }
+
+
