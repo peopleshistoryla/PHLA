@@ -45,8 +45,15 @@ div{
     padding-bottom: 25px;
     border-radius: 10px;  
     
-    
-    
 }
+
+ul {
+    list-style: circle;
+    padding-left: 40px;
+  }
+  ol {
+    list-style: decimal;
+    padding-left: 40px;
+  }
 
 
