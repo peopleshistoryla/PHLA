@@ -1,6 +1,6 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-/server/templates/static/bundle.js
+main-app/server/templates/static/bundle.js
 
 # dependencies
 /node_modules

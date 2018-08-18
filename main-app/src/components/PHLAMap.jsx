@@ -17,24 +17,23 @@ export default class PHLAMap extends React.Component{
     }
 
     componentDidMount(){
+        this.setState({
+            timeline_values: [
+                {label: "1970s", value: 1970},
+                {label: "1980s", value: 1980},
+                {label: "1990s", value: 1990},
+                {label: "2000s", value: 2000},
+                {label: "2010s", value: 2010},
+
+            ]
+        });
         //do a fetch to get the markers around them
         window.navigator.geolocation.getCurrentPosition(
             (pos) => {
                 console.log('setting state...')
                 console.log(pos.coords);
 
-                //make another async call to get the values to fill in for the timeline
-                //set the loading state to true until this returns to get
-                this.setState({
-                    timeline_values: [
-                        {label: "1970s", value: 1970},
-                        {label: "1980s", value: 1980},
-                        {label: "1990s", value: 1990},
-                        {label: "2000s", value: 2000},
-                        {label: "2010s", value: 2010},
-
-                    ]
-                });
+                
                 this.setState({
                     location: [ pos.coords.latitude, pos.coords.longitude],
                     loading: false
@@ -46,16 +45,7 @@ export default class PHLAMap extends React.Component{
                 console.log('could not get current location, so defaulting to center of Los Angeles')
                 //make another async call to get the values to fill in for the timeline
                 //set the loading state to true until this returns to get
-                this.setState({
-                    timeline_values: [
-                        {label: "1970s", value: 1970},
-                        {label: "1980s", value: 1980},
-                        {label: "1990s", value: 1990},
-                        {label: "2000s", value: 2000},
-                        {label: "2010s", value: 2010},
-
-                    ]
-                });
+                
                 this.setState({
                     location: [ 34.052436, -118.263170],
                     loading: false

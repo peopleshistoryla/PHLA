@@ -86,7 +86,18 @@ app.get("/stories", function(req, res){
 app.get("/story/:id", function(req, res){
     StoryModel.find({"_id": req.params.id}).then(function(v){
         res.send(v);
+    }, function(err){
+        res.send(err);
     });
+});
+
+app.get("/story/decade/:decade", function(req, res){
+    var decade = parseInt(req.params['decade'], 10);
+    StoryModel.find({
+        "decade": decade
+    }).then(function(v){
+        res.send(v);
+    })
 });
 
 app.get("/dashboard", (function(req, res){
