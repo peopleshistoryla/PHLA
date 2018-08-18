@@ -1,7 +1,9 @@
 var mongoose = require("mongoose");
 var StoryModel = require("./models")
 var q = require("q");
-let db = mongoose.connect("mongodb://localhost:27017/test", 
+var dbString = "mongodb://phla:" + configs['PHLA_PASS'] + "@phla-cluster-shard-00-00-1ojxn.mongodb.net:27017,phla-cluster-shard-00-01-1ojxn.mongodb.net:27017,phla-cluster-shard-00-02-1ojxn.mongodb.net:27017/test?ssl=true&replicaSet=PHLA-cluster-shard-0&authSource=admin&retryWrites=true";
+
+let db = mongoose.connect(dbString, 
     function(err){});
 
 

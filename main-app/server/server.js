@@ -7,18 +7,21 @@ const mongoose = require('mongoose')
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const StoryModel = require("./models");
+const fs = require("fs");
 
 nunjucks.configure( __dirname + "/templates", {
     express:app,
     autoescape:true
 });
 
+var configs = JSON.parse(fs.readFileSync(__dirname + "/../../.env.local"));
+var dbString = "mongodb://phla:" + configs['PHLA_PASS'] + "@phla-cluster-shard-00-00-1ojxn.mongodb.net:27017,phla-cluster-shard-00-01-1ojxn.mongodb.net:27017,phla-cluster-shard-00-02-1ojxn.mongodb.net:27017/test?ssl=true&replicaSet=PHLA-cluster-shard-0&authSource=admin&retryWrites=true";
 app.use('/static', express.static(path.join(__dirname + '/./templates/static')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next){
-    let db = mongoose.connect("mongodb://localhost:27017/test", function(err){
+    let db = mongoose.connect(dbString, function(err){
         if (err !== null){ 
             next(new Error("Could not connect to database!"));
         }else{
@@ -29,9 +32,9 @@ app.use(function(req, res, next){
 });
 
 app.use(session({
-    secret: process.env.PHLA_KEY,
+    secret: configs['PHLA_KEY'],
     store: new MongoStore({ 
-            url: "mongodb://localhost:27017/test"
+            url: dbString
         })
     })
 );
