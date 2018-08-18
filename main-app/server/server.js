@@ -104,5 +104,13 @@ app.get("/dashboard", (function(req, res){
     res.render("admin_dashboard.html");
 }));
 
+app.get("/dashboard/video/:id", function(req, res){
+    res.render("admin_video.html");
+});
+
+app.get("/dashboard/context/:id", function(req, res){
+    res.render("admin_context.html");
+});
+
 app.listen(3000);
 console.log("now listening on port 3000")
