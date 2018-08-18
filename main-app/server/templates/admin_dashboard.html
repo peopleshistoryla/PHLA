@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>PHLA Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="static/admin.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/admin.css" />
     <script src="main.js"></script>
 </head>
 <body>
@@ -17,42 +17,61 @@
         Welcome User!
     </div>
 
-    <nav class="Video_Info">
+    <div class="video_info">
         <ol>
             <li>
                 Video 1
                 <ul>
-                    <li><a href="">Video Name</a></li>
-                    <li><a href="">Area</a></li>
-                    <li><a href="">Upload Time</a></li>
+                    <li><a href="">Video Name, Area, Upload Time</a></li>
                 </ul>
             </li>
             <li>
                 Video 2
                 <ul>
-                    <li><a href="">Video Name</a></li>
-                    <li><a href="">Area</a></li>
-                    <li><a href="">Upload Time</a></li>
+                    <li><a href="">Video Name, Area, Upload Time</a></li>
                 </ul>
             </li>
             <li>
                 Video 3
                 <ul>
-                    <li><a href="">Video Name</a></li>
-                    <li><a href=""> Area</a></li>
-                    <li><a href="">Upload Time</a></li>
+                    <li><a href="">Video Name, Area, Upload Time</a></li>
                 </ul>
             </li>
 
             <li>
                 Video 4
                 <ul>
-                    <li><a href="">Video Name</a></li>
-                    <li><a href=""> Area</a></li>
-                    <li><a href="">Upload Time</a></li>
+                    <li><a href="">Video Name, Area, Upload Time</a></li>
+        
                 </ul>
             </li>
         </ol>
-    </nav>
+    </div>
+
+
+    <div class= "video_entry">
+        <form action="">
+                <p class="error_message"><strong>VIDEO COULD NOT BE UPLOADED, PLEASE TRY A DIFFERENT FILE SIZE</strong></p>
+            <h3> Add New Video </h3>
+            
+           <p> 
+               <label for=""> Video Title </label>
+                <input class= "admin_input" type="text"/>
+            </p>
+            
+            <p>
+                <label for=""> Area </label>
+                <input class="admin_input" type="text"/>
+            </p> 
+            <p> 
+
+                <label for=""> Video File </label>
+                <input class="admin_input" type="file"/>
+            </p>
+            <input class="admin_button" type="submit"/>
+            
+        </form>
+        
+    </div>
 </body>
 </html>
