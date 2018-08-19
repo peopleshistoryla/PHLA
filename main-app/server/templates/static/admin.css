@@ -46,7 +46,7 @@ h1
     border: none;
 }
 .admin_video{
-    width: 60%;
+    width: 100%;
     
 }
 div{
@@ -56,6 +56,15 @@ div{
     padding-bottom: 25px;
     border-radius: 10px;  
     
+}
+.video{
+    float:left;
+    width:50%;
+    padding-right: 10px
+}
+
+.video_title{
+    text-align: center;
 }
 .video_entry{
     float: right;
