@@ -45,7 +45,10 @@ h1
     margin-right: 10px;
     border: none;
 }
-
+.admin_video{
+    width: 60%;
+    
+}
 div{
     border: black solid;
     border-width: 2px;
