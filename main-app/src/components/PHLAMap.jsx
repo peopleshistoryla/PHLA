@@ -1,5 +1,5 @@
 import React from 'react';
-import {Map, TileLayer, Marker} from 'react-leaflet'
+import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import Timeline from './Timeline'
 import fetch from 'cross-fetch';
 
@@ -104,7 +104,12 @@ export default class PHLAMap extends React.Component{
                             <TileLayer attribution="&nbsp; &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                             {this.state.markers.map((elem, idx) => {
-                                return <Marker position={elem.location} key={idx}></Marker>
+                                return <Marker position={elem.location} key={idx}>
+                                        <Popup>
+                                            <p>{elem.title}</p>
+                                            <p>{elem.context.year}</p>
+                                        </Popup>
+                                </Marker>
                             })}
                         </Map>
                     </div>
