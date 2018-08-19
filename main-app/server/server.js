@@ -96,7 +96,12 @@ app.get("/story/decade/:decade", function(req, res){
     StoryModel.find({
         "decade": decade
     }).then(function(v){
-        res.send(v);
+        //switch up the long and lat to get it ready for leaflet
+        const nv = v.map((elm) => {
+            elm.location = [ elm.location[1], elm.location[0]];
+            return elm;
+        })
+        res.send(nv);
     })
 });
 
