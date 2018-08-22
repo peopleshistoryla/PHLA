@@ -14,7 +14,36 @@
     <h1 class="video_title">Dummy Title</h1>
     <video controls="controls" src="/static/test.mp4" class="admin_video"></video>
 </div>
-<div class="video_entry"> THE FORM GOES HERE
+<div class="video_entry"> 
+        <form action="/admin" method="POST">
+            <p><label>Video Title</label>
+            <input class="admin_input" title="Video Title" placeholder="" type="text" /> </p>
+            
+            <p><label>Decade</label>
+                <select name="Decade">
+                    <option value="1970">1970</option>
+                    <option value="1980">1980</option>
+                    <option value="1990">1990</option>
+                    <option value="2000">2000</option>
+                    <option value="2010">2010</option>
+                </select>
+            </p>
+            <p><label>Video</label>
+            <input claas="admin_input" title="Upload Video" placeholder="" type="file"/></p>
+            
+            <p><label>Latitude</label>
+            <input class="admin_input" title="Latitude" placeholder="" type="number"/></p>
+            
+            <p><label>Longitude</label>
+            <input class="admin_input" title="Longitude" placeholder="" type="number"/></p>
+            
+            <p><label>Credits</label>
+            <input class="admin_input" title="Credits" placeholder="" type="text"/></p>
+
+            <p>
+            <input class="admin_button" type="submit"/></p>
+        </form>
+    
 
 
 
