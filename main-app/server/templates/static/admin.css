@@ -3,8 +3,16 @@
 .admin_html{
     font-family: sans-serif;
     background-color: rgb(131, 128, 128);
+}
+
+.spacing{
+    margin-bottom: 0px;
 
 }
+.other_spacing{
+    margin-top: 0px;
+}
+
 .welcome_message{
     background-color: rgb(141, 141, 19);
     color: white;
@@ -16,6 +24,12 @@
     
 
     
+}
+.text_area{
+    width: 400px;
+    height: 100px;
+    border-radius: 10px;
+
 }
 .admin_html{
     background-color: lightgrey;
