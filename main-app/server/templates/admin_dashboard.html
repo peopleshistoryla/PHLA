@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/static/admin.css" />
     <script src="main.js"></script>
+
+
+<div class="topnav">
+    <a class="active" href="#dashboard">Dashboard</a>
+    <a href="#videos">Videos</a>
+    <a href="#context">Context</a>
+  </div>
 </head>
 <body>
     <div class= "dashboard" style= border:0px>
@@ -48,7 +55,6 @@
         </ol>
     </div>
 
-
     <div class= "video_entry">
         <form action="">
                 <p class="error_message"><strong>VIDEO COULD NOT BE UPLOADED, PLEASE TRY A DIFFERENT FILE SIZE</strong></p>
@@ -59,10 +65,25 @@
                 <input class= "admin_input" type="text"/>
             </p>
             
-            <p>
-                <label for=""> Area </label>
-                <input class="admin_input" type="text"/>
-            </p> 
+    
+           
+            <p><label>Area</label>
+                <select name="Area">
+                    <option value="Baldwin Hills">Baldwin Hills</option>
+                    <option value="Crenshaw">Crenshaw</option>
+                    <option value="Culver City">Culver City</option>
+                    <option value="Downtown">Downtown</option>
+                    <option value="Echo Park">Echo Park</option>
+                    <option value="Hollywood">Hollywood</option>
+                    <option value="Inglewood">Inglewood</option>
+                    <option value="Koreatown">Koreatown</option>
+                    <option value="Little Ethiopia">Little Ethiopia</option>
+                    <option value="Mid-Wilshire">Mid-Wilshire</option>
+                    <option value="Santa Monica">Santa Monica</option>
+                    <option value="West Hollywood">West Hollywood</option>
+                </select>
+            </p>
+           
             <p> 
 
                 <label for=""> Video File </label>

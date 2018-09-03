@@ -34,6 +34,11 @@
 .admin_html{
     background-color: lightgrey;
 }
+
+.Add_Reference{
+    border: none;
+
+}
     
 h1
 {
@@ -50,6 +55,7 @@ h1
 .admin_button{
     padding: 8px;
     background-color:rgb(141, 141, 19);
+    text: black;
 }
 .error_message{
     padding: 0px;
@@ -106,4 +112,8 @@ ol {
     border-left:none;
     border-radius:0px;
     padding-right: 20px;
+}
+.topnav{
+    border: none;
+    text-align: center;
 }
