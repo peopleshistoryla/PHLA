@@ -37,6 +37,7 @@
 
 .Add_Reference{
     border: none;
+    padding-top: 25px;
 
 }
     
@@ -116,4 +117,9 @@ ol {
 .topnav{
     border: none;
     text-align: center;
+}
+
+.active{
+    background-color: yellow;
+    color: white;
 }
