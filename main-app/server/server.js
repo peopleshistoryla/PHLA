@@ -63,8 +63,106 @@ app.post("/admin", function(req, res){
         res.render("admin_login.html", {show_error: true});
     }else{
         req.session.user = "Admin";
-        res.redirect("/dashboard");
+        res.redirect("/admin/dashboard");
     }
+});
+
+app.get("/admin/dashboard", (function(req, res){
+    StoryModel.model.find().then((records) => {
+        res.render("admin_dashboard.html", {
+            stories: records,
+            neighborhoods: StoryModel.neighborhoods
+        });
+    }, (err) => {
+        console.log(err)
+        res.render("admin_dashboard.html", {
+            "error": "Could not finish the query at this moment"
+        })
+    })
+    
+}));
+
+app.post("/admin/dashboard", (function(req, res){
+    const req_body = req.body;
+    StoryModel.model.createFromObj({
+        area:req_body['area'],
+        title:req_body['title']
+    }).then((evt) => {
+        res.redirect("/admin/video/" + evt.id);
+    }, (err) => {
+        res.render('admin_dashboard.html', {
+            "error":"Could not add a new story at this time"
+        });
+    });
+}))
+
+app.get("/admin/video/:id", function(req, res){
+    StoryModel.model.findById(req.params['id']).then((record) => {
+        res.render("admin_video.html", {
+            story: record,
+            neighborhoods: StoryModel.neighborhoods
+        });
+    }, (err) => {
+        console.log(err);
+        res.render("admin_video.html")
+    })
+});
+
+app.post("/admin/video/:id", function(req, res){
+    var updates = {
+        title: req.body['title'],
+        location: [req.body['lon'], req.body['lat']],
+        decade: req.body['decade'],
+        area: req.body['area']
+    }
+    StoryModel.model.findByIdAndUpdate(req.params['id'], updates,{
+        new: true
+    }).then((record) =>{
+        res.render("admin_video.html", {
+            success:"Story updated!",
+            story:record,
+            neighborhoods: StoryModel.neighborhoods
+        });
+    }, (err) => {
+        console.log(err);
+        res.render("admin_video.html", {
+            "error": "Could not update Story at this time"
+        });
+    });
+})
+
+app.get("/admin/context/:id", function(req, res){
+    StoryModel.model.findById(req.params['id']).then((record) =>{
+        res.render("admin_context.html", {
+            story:record,
+            neighborhoods: StoryModel.neighborhoods
+        });
+    }, (err) => {
+        console.log(err);
+        res.render("admin_context.html", {
+            "error": "Could not find that Story at this time"
+        });
+    });
+});
+
+app.post("/admin/context/:id", function(req, res){
+    var updates = {
+        context:{text: req.body['text']}
+    }
+    StoryModel.model.findByIdAndUpdate(req.params['id'], updates,{
+        new: true
+    }).then((record) =>{
+        res.render("admin_context.html", {
+            success:"Story updated!",
+            story:record,
+            neighborhoods: StoryModel.neighborhoods
+        });
+    }, (err) => {
+        console.log(err);
+        res.render("admin_context.html", {
+            "error": "Could not update Story at this time"
+        });
+    });
 });
 
 
@@ -105,17 +203,6 @@ app.get("/story/decade/:decade", function(req, res){
     })
 });
 
-app.get("/dashboard", (function(req, res){
-    res.render("admin_dashboard.html");
-}));
-
-app.get("/dashboard/video/:id", function(req, res){
-    res.render("admin_video.html");
-});
-
-app.get("/dashboard/context/:id", function(req, res){
-    res.render("admin_context.html");
-});
 
 app.listen(3000);
 console.log("now listening on port 3000")

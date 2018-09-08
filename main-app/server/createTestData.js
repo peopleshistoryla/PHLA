@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var StoryModel = require("./models")
+var randomNeighborhood = require("./models")
 var q = require("q");
 var fs = require("fs");
 var configs = JSON.parse(fs.readFileSync(__dirname + "/../../.env.local"));
@@ -40,34 +41,44 @@ function makeStoryRecords(){
             "credits":[
                 "Shariq Torres", "TLC", "CSULA"
             ],
+            "references": [
+                {
+                    "year":1998,
+                    "publisher": "Dodo Brown",
+                    "author": "Don Lemon",
+                    "title": "Lemon is a fool!"
+                }
+            ],
             "year": 0,
             "text": makeText()
         }
     };
     var async_funcs = [];
-    for(var i = 0; i < decade.length; i++){
-        for(var a = 0; a < coords.length; a++){
-            var sp = storyParms;
-            sp.context.year = decade[i] + a;
-            sp.decade = decade[i];
-            sp.location = coords[a]
-            async_funcs.push(StoryModel.createFromObj(sp));
-        }
+    
+    for(var i = 0; i < 24; i++){
+        var randomLocation = Math.floor((Math.random() * 24) + 1); 
+        var randomNeighborhood = Math.floor((Math.random() * 12) + 1);
+        var sp = storyParms;
+        var randomYearSuffix = Math.floor((Math.random() * 14) + 1);
+        var randomYearPrefix = Math.floor((Math.random() * 4) + 1);
+        sp.context.year = decade[ randomYearPrefix ] + randomYearSuffix;
+        sp.decade = decade[randomYearPrefix];
+        sp.location = coords[ randomLocation ];
+        sp.area = randomNeighborhood;
+        async_funcs.push(StoryModel.model.createFromObj(sp));
+        
     }
 
     q.all(async_funcs).then(function(){
         console.log("created new records!")
         process.exit();
     });
-
-    //process.exit();
-
 }
 
 
 
 function clearDB(){
-    StoryModel.deleteMany().then(function(v){
+    StoryModel.model.deleteMany().then(function(v){
         console.log("collection cleared");
         process.exit();   
     })

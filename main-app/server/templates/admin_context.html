@@ -6,27 +6,32 @@
     <title>PHLA Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/static/admin.css" />
-    <script src="main.js"></script>
 
 
 <div class="topnav">
-    <a class="active" href="#context">Context</a>
-    <a href="#videos">Videos</a>
-    <a href="#dashboard">Dashboard</a>
+    <a class="active" href="/admin/context/{{story.id}}">Context</a>
+    <a href="/admin/video/{{story.id}}">Videos</a>
+    <a href="/admin/dashboard">Dashboard</a>
   </div>
 </head>
 
 <body>
     <div>
     
-            <p class= "spacing">Video Title</p>
-            <input class="admin_input" title="Video Title" placeholder="" type="text"></input>
-
-            <p class= "spacing">Location</p>
-            <input class="admin_input" title="Location" placeholder="" type="text"/></input>
-        <form>
+            <p class= "spacing"><strong>Video Title:</strong> {{story.title}}</p>
+            <p class= "spacing">Location:
+            
+            {% for hood in neighborhoods %}
+                {% if story.area == hood.value %}
+                {{hood.label}}
+                {% endif %}
+            {% endfor %}</p>
+                    
+               
+        <form action="/admin/context/{{story.id}}" method="POST">
             <p class= "spacing"> <label>Context</label></p>
-            <p class= "other_spacing"> <textarea class= "text_area"></textarea></p>
+            <p class= "other_spacing"> <textarea class="text_area" name="text">{{story.context.text}}</textarea></p>
+            <input class="admin_button" type="submit" value="Submit" />
         </form>
     </div>
 
