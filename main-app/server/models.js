@@ -45,7 +45,17 @@ var StorySchema = mongoose.Schema(
     }
 )
 
-
+StorySchema.methods.formatArea = function(){
+        var ret = null;
+        for(var i = 0; i < constants.neighborhoods.length;  i++){
+            if(constants.neighborhoods[i].value == this.area){
+                ret = constants.neighborhoods[i].label;
+                break;
+            }
+        }
+        return ret;
+    
+}
 StorySchema.statics.createFromObj = function(data){
 
     let promise = q.defer();

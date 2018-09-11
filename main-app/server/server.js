@@ -8,6 +8,8 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const StoryModel = require("./models");
 const fs = require("fs");
+var constants = require('./constants')
+
 
 nunjucks.configure( __dirname + "/templates", {
     express:app,
@@ -21,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next){
+    if(!req.db){
     let db = mongoose.connect(dbString, function(err){
         if (err !== null){ 
             next(new Error("Could not connect to database!"));
@@ -29,7 +32,12 @@ app.use(function(req, res, next){
             next();
         }
     });
+    }else{
+        next();
+    }
 });
+
+
 
 app.use(session({
     secret: configs['PHLA_KEY'],
@@ -38,6 +46,14 @@ app.use(session({
         })
     })
 );
+
+app.use(function(req, res, next){
+    if(req.path.search(/admin/) == 1 && !req.session.user){
+        res.redirect("/login");
+    }else{
+        next();
+    }
+})
 
 //error handler middleware
 app.use(function(err, req, res, next){
@@ -51,11 +67,11 @@ app.get('/', function (req, res) {
     res.render('index.html');
 });
 
-app.get('/admin', function(req, res){
+app.get('/login', function(req, res){
     res.render("admin_login.html");
 })
 
-app.post("/admin", function(req, res){
+app.post("/login", function(req, res){
     const req_body = req.body;
     if(req_body['username'] == "" && req_body['password'] == ""){
         res.render("admin_login.html", {show_error: true});
@@ -168,7 +184,7 @@ app.post("/admin/context/:id", function(req, res){
 
 app.post("/create/story", function(req, res){
     const req_body = req.body;
-    StoryModel.createFromObj(req_body).then(function(v){
+    StoryModel.model.createFromObj(req_body).then(function(v){
         console.log(v)
         res.send(v);
     });
@@ -176,13 +192,13 @@ app.post("/create/story", function(req, res){
 });
 
 app.get("/stories", function(req, res){
-    StoryModel.find().then(function(v){
+    StoryModel.model.find().then(function(v){
         res.send(v);
     });
 });
 
 app.get("/story/:id", function(req, res){
-    StoryModel.find({"_id": req.params.id}).then(function(v){
+    StoryModel.model.find({"_id": req.params.id}).then(function(v){
         res.send(v);
     }, function(err){
         res.send(err);
@@ -191,15 +207,34 @@ app.get("/story/:id", function(req, res){
 
 app.get("/story/decade/:decade", function(req, res){
     var decade = parseInt(req.params['decade'], 10);
-    StoryModel.find({
+    StoryModel.model.find({
         "decade": decade
     }).then(function(v){
+        console.log("inside of decade")
         //switch up the long and lat to get it ready for leaflet
-        const nv = v.map((elm) => {
-            elm.location = [ elm.location[1], elm.location[0]];
-            return elm;
-        })
-        res.send(nv);
+        function formatArea(val){
+            var ret = null;
+            for(var i = 0; i < constants.neighborhoods.length;  i++){
+                if(constants.neighborhoods[i].value == val){
+                    ret = constants.neighborhoods[i].label;
+                    break;
+                }
+            }
+            return ret;
+        }
+        for(var i = 0; i < v.length; i++){
+            console.log(v[i])
+            const a = formatArea(v[i].area)
+
+            v[i] = Object.assign({}, v[i].toObject(), 
+            {neighborhood: a, location: [v[i].location[1], v[i].location[0]]})
+        }
+        
+        res.send(v);
+    }).catch((err) => {
+        console.log("error")
+        console.log(err)
+        res.send([]);
     })
 });
 
