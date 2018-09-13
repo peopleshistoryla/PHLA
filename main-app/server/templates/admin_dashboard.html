@@ -29,7 +29,7 @@
     </div>
 
     <div class= "video_entry">
-        <form action="/admin/dashboard" method="POST">
+        <form action="/admin/dashboard" method="POST" enctype="multipart/form-data">
             {% if error %}
                 <p class="error_message"><strong>{{error}}</strong></p>
             {% endif %}
@@ -57,7 +57,7 @@
             <p> 
 
                 <label for=""> Video File </label>
-                <input class="admin_input" type="file"/>
+                <input class="admin_input" name="vid" type="file"/>
             </p>
             <input class="admin_button" type="submit"/>
             

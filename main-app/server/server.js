@@ -8,8 +8,18 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const StoryModel = require("./models");
 const fs = require("fs");
-var constants = require('./constants')
+var constants = require('./constants');
+const multer = require("multer");
+const upload = multer();
+const s3bucket = "phla";
+const AWS = require('aws-sdk');
 
+AWS.config.update({
+    accessKeyId: "AKIAIAEE6TBCOIHIS2LA",
+    secretAccessKey: "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"
+  });
+
+var s3 = new AWS.S3();
 
 nunjucks.configure( __dirname + "/templates", {
     express:app,
@@ -98,18 +108,39 @@ app.get("/admin/dashboard", (function(req, res){
     
 }));
 
-app.post("/admin/dashboard", (function(req, res){
+app.post("/admin/dashboard", upload.single('vid'), (function(req, res){
     const req_body = req.body;
-    StoryModel.model.createFromObj({
-        area:req_body['area'],
-        title:req_body['title']
-    }).then((evt) => {
-        res.redirect("/admin/video/" + evt.id);
-    }, (err) => {
-        res.render('admin_dashboard.html', {
-            "error":"Could not add a new story at this time"
+    if(req.file){
+        //upload the video to S3
+        const fileParts = req.file.originalname.split(".")
+        const newFileName = req.file.originalname[0] + "_" + Date.now() + "." + fileParts[ fileParts.length - 1];
+        s3.upload({
+            Bucket: s3bucket,
+            Body: req.file.buffer,
+            Key: newFileName
+        }, (err, success) => {
+            if(success){
+                StoryModel.model.createFromObj({
+                    area:req_body['area'],
+                    title:req_body['title']
+                }).then((evt) => {
+                    res.redirect("/admin/video/" + evt.id);
+                }, (err) => {
+                    res.render('admin_dashboard.html', {
+                        "error":"Could not add a new story at this time"
+                    });
+                });
+            }
+            
+            if(err){
+                throw new Error(err);
+            }
+
         });
-    });
+    }
+
+
+    
 }))
 
 app.get("/admin/video/:id", function(req, res){
