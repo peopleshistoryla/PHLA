@@ -22,7 +22,7 @@
     <video controls="controls" src="/static/test.mp4" class="admin_video"></video>
 </div>
 <div class="video_entry"> 
-        <form action="/admin/video/{{story.id}}" method="POST">
+        <form action="/admin/video/{{story.id}}" method="POST" enctype="multipart/form-data">
             <p><label>
                 Title
             </label>
@@ -52,7 +52,7 @@
                     </select>
             </p>
             <p><label>Video</label>
-            <input claas="admin_input" title="Upload Video" placeholder="" type="file"/></p>
+            <input class="admin_input" title="Upload Video" name="vid" placeholder="" type="file"/></p>
             
             <p><label>Latitude</label>
             <input class="admin_input" name="lat" value="{{story.location[1]}}", title="Latitude" placeholder="" step=".0000001" type="number"/></p>

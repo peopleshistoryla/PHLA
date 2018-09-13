@@ -113,16 +113,20 @@ app.post("/admin/dashboard", upload.single('vid'), (function(req, res){
     if(req.file){
         //upload the video to S3
         const fileParts = req.file.originalname.split(".")
-        const newFileName = req.file.originalname[0] + "_" + Date.now() + "." + fileParts[ fileParts.length - 1];
+        const newFileName = fileParts[0] + "_" + Date.now() + "." + fileParts[ fileParts.length - 1];
         s3.upload({
             Bucket: s3bucket,
             Body: req.file.buffer,
             Key: newFileName
         }, (err, success) => {
             if(success){
+                console.log(success)
                 StoryModel.model.createFromObj({
                     area:req_body['area'],
-                    title:req_body['title']
+                    title:req_body['title'],
+                    video:{
+                        url: success.Location
+                    }
                 }).then((evt) => {
                     res.redirect("/admin/video/" + evt.id);
                 }, (err) => {
@@ -137,11 +141,19 @@ app.post("/admin/dashboard", upload.single('vid'), (function(req, res){
             }
 
         });
+    }else{
+        StoryModel.model.createFromObj({
+            area:req_body['area'],
+            title:req_body['title']
+        }).then((evt) => {
+            res.redirect("/admin/video/" + evt.id);
+        }, (err) => {
+            res.render('admin_dashboard.html', {
+                "error":"Could not add a new story at this time"
+            });
+        });
     }
-
-
-    
-}))
+}));
 
 app.get("/admin/video/:id", function(req, res){
     StoryModel.model.findById(req.params['id']).then((record) => {
@@ -155,27 +167,68 @@ app.get("/admin/video/:id", function(req, res){
     })
 });
 
-app.post("/admin/video/:id", function(req, res){
-    var updates = {
-        title: req.body['title'],
-        location: [req.body['lon'], req.body['lat']],
-        decade: req.body['decade'],
-        area: req.body['area']
+app.post("/admin/video/:id", upload.single('vid'), function(req, res){
+    if(req.file){
+        //upload the video to S3
+        const fileParts = req.file.originalname.split(".")
+        const newFileName = fileParts[0] + "_" + Date.now() + "." + fileParts[ fileParts.length - 1];
+        s3.upload({
+            Bucket: s3bucket,
+            Body: req.file.buffer,
+            Key: newFileName
+        }, (err, success) => {
+            if(success){
+                var updates = {
+                    title: req.body['title'],
+                    location: [req.body['lon'], req.body['lat']],
+                    decade: req.body['decade'],
+                    area: req.body['area'],
+                    video: {
+                        url: success.Location
+                    }
+                }
+                StoryModel.model.findByIdAndUpdate(req.params['id'], updates,{
+                    new: true
+                }).then((record) =>{
+                    res.render("admin_video.html", {
+                        success:"Story updated!",
+                        story:record,
+                        neighborhoods: StoryModel.neighborhoods
+                    });
+                }, (err) => {
+                    console.log(err);
+                    res.render("admin_video.html", {
+                        "error": "Could not update Story at this time"
+                    });
+                });
+            }
+
+            if(err){
+                throw new Error(err);
+            }
+        })
+    }else{
+        var updates = {
+            title: req.body['title'],
+            location: [req.body['lon'], req.body['lat']],
+            decade: req.body['decade'],
+            area: req.body['area']
+        }
+        StoryModel.model.findByIdAndUpdate(req.params['id'], updates,{
+            new: true
+        }).then((record) =>{
+            res.render("admin_video.html", {
+                success:"Story updated!",
+                story:record,
+                neighborhoods: StoryModel.neighborhoods
+            });
+        }, (err) => {
+            console.log(err);
+            res.render("admin_video.html", {
+                "error": "Could not update Story at this time"
+            });
+        });
     }
-    StoryModel.model.findByIdAndUpdate(req.params['id'], updates,{
-        new: true
-    }).then((record) =>{
-        res.render("admin_video.html", {
-            success:"Story updated!",
-            story:record,
-            neighborhoods: StoryModel.neighborhoods
-        });
-    }, (err) => {
-        console.log(err);
-        res.render("admin_video.html", {
-            "error": "Could not update Story at this time"
-        });
-    });
 })
 
 app.get("/admin/context/:id", function(req, res){
