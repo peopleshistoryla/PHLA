@@ -13,10 +13,11 @@ const multer = require("multer");
 const upload = multer();
 const s3bucket = "phla";
 const AWS = require('aws-sdk');
+var configs = JSON.parse(fs.readFileSync(__dirname + "/../../.env.local"));
 
 AWS.config.update({
-    accessKeyId: "AKIAIAEE6TBCOIHIS2LA",
-    secretAccessKey: "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"
+    accessKeyId: configs['ACCESS_CODE'],
+    secretAccessKey: configs['SECRET'] 
   });
 
 var s3 = new AWS.S3();
@@ -26,7 +27,6 @@ nunjucks.configure( __dirname + "/templates", {
     autoescape:true
 });
 
-var configs = JSON.parse(fs.readFileSync(__dirname + "/../../.env.local"));
 var dbString = "mongodb://phla:" + configs['PHLA_PASS'] + "@phla-cluster-shard-00-00-1ojxn.mongodb.net:27017,phla-cluster-shard-00-01-1ojxn.mongodb.net:27017,phla-cluster-shard-00-02-1ojxn.mongodb.net:27017/test?ssl=true&replicaSet=PHLA-cluster-shard-0&authSource=admin&retryWrites=true";
 app.use('/static', express.static(path.join(__dirname + '/./templates/static')));
 app.use(bodyParser.json());

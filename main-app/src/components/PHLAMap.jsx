@@ -102,7 +102,7 @@ export default class PHLAMap extends React.Component{
             }else{
                 return(<div>
                     <div id="mapdiv">
-                        <Map center={this.state.location} zoom={13}>
+                        <Map center={this.state.location} zoom={11}>
                             <TileLayer attribution="&nbsp; &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                             {this.state.markers.map((elem, idx) => {
