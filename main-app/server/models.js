@@ -1,12 +1,28 @@
 var mongoose = require('mongoose')
+var constants = require('./constants')
 var q = require("q");
+    
 
+
+
+var StoryReferences = mongoose.Schema(
+    {
+        year: Number,
+        link: String,
+        publisher: String,
+        author: String,
+        title: String,
+        from_pages: Number,
+        to_pages: Number
+    }
+)
 var StoryContextSchema = mongoose.Schema(
     {
         references:[] ,//array of URLs,
         year: Number,
         text: String,
-        credits: [], //array of strings (names)
+        credits: [], //array of strings (names),
+        references:[] //arry of StoryReferences
     }
 )
 
@@ -23,11 +39,23 @@ var StorySchema = mongoose.Schema(
         title: String,
         video: StoryVideoSchema, // a video schema 1 to 1
         decade: Number,
-        context: StoryContextSchema
+        context: StoryContextSchema,
+        area:Number,
+        uploaded_at: {type: Date, default: Date.now() }
     }
 )
 
-
+StorySchema.methods.formatArea = function(){
+        var ret = null;
+        for(var i = 0; i < constants.neighborhoods.length;  i++){
+            if(constants.neighborhoods[i].value == this.area){
+                ret = constants.neighborhoods[i].label;
+                break;
+            }
+        }
+        return ret;
+    
+}
 StorySchema.statics.createFromObj = function(data){
 
     let promise = q.defer();
@@ -47,6 +75,8 @@ StorySchema.index({location: '2dsphere'})
 
 const Story = mongoose.model('Story', StorySchema);
 
-module.exports = Story;
-
+module.exports = {
+    model:Story,
+    neighborhoods: constants.neighborhoods
+}
 

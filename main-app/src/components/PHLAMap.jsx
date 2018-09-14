@@ -2,6 +2,8 @@ import React from 'react';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import Timeline from './Timeline'
 import fetch from 'cross-fetch';
+import PHLAPopup from './PHLAPopup'
+import StoryOverlay from './StoryOverlay';
 
 export default class PHLAMap extends React.Component{
     constructor(props){
@@ -91,7 +93,7 @@ export default class PHLAMap extends React.Component{
                             <TileLayer attribution="&nbsp; &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                             {this.state.markers.map((elem, idx) => {
-                                return <Marker position={elem.location} key={idx}></Marker>
+                                return <PHLAPopup position={elem.location} key={idx}></PHLAPopup>
                             })}
                         </Map>
                     </div>
@@ -100,15 +102,14 @@ export default class PHLAMap extends React.Component{
             }else{
                 return(<div>
                     <div id="mapdiv">
-                        <Map center={this.state.location} zoom={13}>
+                        <Map center={this.state.location} zoom={11}>
                             <TileLayer attribution="&nbsp; &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                             {this.state.markers.map((elem, idx) => {
-                                return <Marker position={elem.location} key={idx}>
-                                        <Popup>
-                                            <p>{elem.title}</p>
-                                            <p>{elem.context.year}</p>
-                                        </Popup>
+                                return <Marker position={elem.location} item={elem} customClass="mark" key={idx}>
+                                        <PHLAPopup customClass="mark" maxWidth="400">
+                                            <StoryOverlay item={elem}></StoryOverlay>
+                                        </PHLAPopup>
                                 </Marker>
                             })}
                         </Map>

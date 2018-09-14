@@ -11,6 +11,16 @@ body {
   width:100%;
 }
 
+.mark .leaflet-popup-tip,
+.mark .leaflet-popup-content-wrapper{
+  background-color: #C86227;
+  width:450px;
+  color:white;
+}
+
+.mark .leaflet-popup-content{
+  width:450px;
+}
 
 .header-menu{
   height: 50px;
