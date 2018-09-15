@@ -6,18 +6,19 @@
     <title>PHLA Admin Videos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/static/admin.css" />
-    
-    <div class="topnav">
-        <a class="active" href="/admin/video/{{story.id}}">Video</a>
-        <a href="/admin/dashboard">Dashboard</a>
-        <a href="/admin/context/{{story.id}}">Context</a>
-      </div>
 
 </head>
 
 
 <body>
-<div class="video">
+
+    <div class="topnav">
+        <a class="active" href="/admin/dashboard">Dashboard</a>
+        <a  href="/admin/video/{{story.id}}">Video</a>
+        <a href="/admin/context/{{story.id}}">Context</a>
+    </div>
+
+    <div class="video">
     <h1 class="video_title">{{story.title}}</h1>
     <video controls="controls" src="/static/test.mp4" class="admin_video"></video>
 </div>

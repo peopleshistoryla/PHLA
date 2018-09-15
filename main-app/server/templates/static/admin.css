@@ -2,7 +2,7 @@
 
 .admin_html{
     font-family: sans-serif;
-    background-color: rgb(131, 128, 128);
+    background-color: #ECF0f3;
 }
 
 .spacing{
@@ -30,11 +30,6 @@
     height: 100px;
     border-radius: 10px;
 
-}
-.admin_html{
-    background-color: lightgrey;
-}
-
 .Add_Reference{
     border: none;
     padding-top: 25px;
@@ -50,7 +45,10 @@ h1
 }
 .admin_input{
     padding: 4px;
-    border-radius: 10px;
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    
     
 }
 .admin_button{
