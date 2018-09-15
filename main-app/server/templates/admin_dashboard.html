@@ -17,7 +17,7 @@
     </div>
 
     <div class="video_info">
-        <ol>
+        <ul>
             {% for story in stories %}
                 <li>
                     <a href="/admin/video/{{story.id}}">{{story.title}}, {{ story.area }} -- {{story.uploaded_at}}</a>
@@ -25,7 +25,7 @@
 
             {% endfor %}
            
-        </ol>
+        </ul>
     </div>
 
     <div class= "video_entry">
