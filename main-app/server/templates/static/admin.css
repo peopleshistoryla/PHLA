@@ -29,6 +29,7 @@
     width: 400px;
     height: 100px;
     border-radius: 10px;
+}
 
 .Add_Reference{
     border: none;
@@ -48,12 +49,12 @@ h1
     border-radius: 5px;
     height: 30px;
     width: 100%;
-    
+
     
 }
 .admin_button{
     padding: 8px;
-    background-color:rgb(141, 141, 19);
+    background-color:#00d8b3;
     text: black;
 }
 .error_message{
