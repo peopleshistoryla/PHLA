@@ -266,23 +266,25 @@ app.post("/admin/context/:id", function(req, res){
 });
 
 
-app.post("/create/story", function(req, res){
-    const req_body = req.body;
-    StoryModel.model.createFromObj(req_body).then(function(v){
-        console.log(v)
-        res.send(v);
-    });
-     
-});
 
-app.get("/stories", function(req, res){
-    StoryModel.model.find().then(function(v){
-        res.send(v);
+app.get("/neighborhood/:id", function(req, res){
+    var query = StoryModel.model.find()
+    query.where("area").equals(req.params.id)
+    .sort({'context.year': 1}).then(function(v){
+        //TODO: check to make sure we are in bounds of the neighborhood array
+        var ret = {
+            items: v,
+            neighborhood: constants.neighborhoods[req.params.id - 1]
+        }
+        res.send(ret);
+    }, (err) => {
+        console.log(err);
+        throw new Error("Could not get neighborhood timeline :(");
     });
 });
 
 app.get("/story/:id", function(req, res){
-    StoryModel.model.find({"_id": req.params.id}).then(function(v){
+    StoryModel.model.findOne({"_id": req.params.id}).then(function(v){
         res.send(v);
     }, function(err){
         res.send(err);
@@ -292,7 +294,8 @@ app.get("/story/:id", function(req, res){
 app.get("/story/decade/:decade", function(req, res){
     var decade = parseInt(req.params['decade'], 10);
     StoryModel.model.find({
-        "decade": decade
+        "decade": decade,
+        "context.text": {$exists: true}
     }).then(function(v){
         console.log("inside of decade")
         //switch up the long and lat to get it ready for leaflet
