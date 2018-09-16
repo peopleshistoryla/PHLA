@@ -4,6 +4,8 @@ import Timeline from './Timeline'
 import fetch from 'cross-fetch';
 import PHLAPopup from './PHLAPopup'
 import StoryOverlay from './StoryOverlay';
+import NeighborhoodSelector from './NeighborhoodSelector';
+import { Link } from 'react-router-dom';
 
 export default class PHLAMap extends React.Component{
     constructor(props){
@@ -80,23 +82,9 @@ export default class PHLAMap extends React.Component{
         }else{
             if(window.outerWidth < 500){
                 return(<div>
-                    <label>Select a Decade</label>
-                    <select onChange={(e) => {
-                        this.changeTimelineDate(e.target.value);
-                    }}>
-                        {year_labels.map((v, idx)=>{
-                            return <option value={idx}>{v}</option>
-                        })}
-                    </select>
-                    <div id="mapdiv">
-                        <Map center={this.state.location} zoom={13}>
-                            <TileLayer attribution="&nbsp; &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                            {this.state.markers.map((elem, idx) => {
-                                return <PHLAPopup position={elem.location} key={idx}></PHLAPopup>
-                            })}
-                        </Map>
-                    </div>
+                    <NeighborhoodSelector></NeighborhoodSelector>
+                    <p style={{"textAlign":"center"}}>-- or --</p>
+                    <p className="redButton"><Link to="/scan">Scan QR</Link></p>
                 </div>
                 ) 
             }else{

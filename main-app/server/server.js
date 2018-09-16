@@ -291,6 +291,11 @@ app.get("/story/:id", function(req, res){
     });
 });
 
+///a/neighborhood
+app.get("/a/neighborhood/", function(req, res){
+    res.send(constants.neighborhoods)
+})
+
 app.get("/story/decade/:decade", function(req, res){
     var decade = parseInt(req.params['decade'], 10);
     StoryModel.model.find({

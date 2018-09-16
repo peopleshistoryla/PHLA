@@ -8,7 +8,7 @@ import SubmitStory from './SubmitStory';
 import NeighborhoodTimeline from './NeighborhoodTimeline';
 import StoryDetail from './StoryDetail';
 import Page from './components/Page';
-
+import Scan from './Scan';
 
 const Page404 = ({location}) => {
     return(
@@ -44,6 +44,7 @@ class Main extends React.Component {
                         <Route path="/submit" component={SubmitStory} />
                         <Route path="/contributors" component={Contributors} />
                         <Route path="/error" component={PageError} />
+                        <Route path="/scan" component={Scan} />
                         <Route component={Page404} />
                     </Switch>
                 </div>
