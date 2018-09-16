@@ -13,8 +13,8 @@
 <body>
 
     <div class="topnav">
-        <a class="active" href="/admin/dashboard">Dashboard</a>
-        <a  href="/admin/video/{{story.id}}">Video</a>
+        <a  href="/admin/dashboard">Dashboard</a>
+        <a class="active" href="/admin/video/{{story.id}}">Video</a>
         <a href="/admin/context/{{story.id}}">Context</a>
     </div>
 
@@ -65,14 +65,18 @@
             <p class= "other_spacing"> <textarea class="text_area"></textarea></p>
 
             
-            <p><label>Add Credit</label>
-                <input class="admin_input" title="Credit" placeholder="" type= "text"/>
-                <input class="admin_input" title="Name or Organization" placeholder="" type= "text"/>
-                <input class="admin_button" type="text" value= ""/>
+            <p>
+                <input class="admin_button" class="admin_input" value="Add Credit" placeholder=""type= "submit"/>
+                
             </p>
-           
-
             
+            <div> 
+                <label>Name or Organization</label>
+                <input class="admin_input" type= "text"/>
+
+            </div>
+            
+
         </form>
     
 

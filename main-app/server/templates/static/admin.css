@@ -34,6 +34,7 @@
 .Add_Reference{
     border: none;
     padding-top: 25px;
+    text-align: left;
 
 }
     
@@ -48,7 +49,7 @@ h1
     padding: 4px;
     border-radius: 5px;
     height: 30px;
-    width: 100%;
+    width: 60%;
 
     
 }
@@ -117,6 +118,18 @@ ol {
     border: none;
     text-align: center;
 }
+
+.context_settings{
+    border: none;
+    text-align: left
+
+}
+
+.context_textarea{
+    width: 800;
+    height:400;
+}
+
 
 .active{
     background-color: yellow;
