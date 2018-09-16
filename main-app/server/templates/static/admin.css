@@ -29,10 +29,12 @@
     width: 400px;
     height: 100px;
     border-radius: 10px;
+}
 
 .Add_Reference{
     border: none;
     padding-top: 25px;
+    text-align: left;
 
 }
     
@@ -47,13 +49,13 @@ h1
     padding: 4px;
     border-radius: 5px;
     height: 30px;
-    width: 100%;
-    
+    width: 60%;
+
     
 }
 .admin_button{
     padding: 8px;
-    background-color:rgb(141, 141, 19);
+    background-color:#00d8b3;
     text: black;
 }
 .error_message{
@@ -116,6 +118,18 @@ ol {
     border: none;
     text-align: center;
 }
+
+.context_settings{
+    border: none;
+    text-align: left
+
+}
+
+.context_textarea{
+    width: 800;
+    height:400;
+}
+
 
 .active{
     background-color: yellow;
