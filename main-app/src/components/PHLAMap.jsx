@@ -22,7 +22,7 @@ export default class PHLAMap extends React.Component{
             location: [],
             loading: true,
             timeline_values: timeline_values,
-            selected_time: timeline_values[1]
+            selected_time: timeline_values[4]
         }
 
         
@@ -102,7 +102,7 @@ export default class PHLAMap extends React.Component{
                             })}
                         </Map>
                     </div>
-                    <Timeline values={year_labels} startingIndex={1} onTimelineSelect={this.changeTimelineDate.bind(this)} />
+                    <Timeline values={year_labels} startingIndex={4} onTimelineSelect={this.changeTimelineDate.bind(this)} />
                 </div>
                 ) 
             }

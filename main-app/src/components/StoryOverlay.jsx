@@ -18,7 +18,7 @@ export default class StoryOverlay extends React.Component{
     render(){
         let info = null;
         if(!this.state.showContext){
-            info = <video src="/static/test.mp4" width="400"></video>
+            info = <video src={this.props.item.video.url} width="400"></video>
         }else{
             info = <p>{this.props.item.context.text}</p>
         }
